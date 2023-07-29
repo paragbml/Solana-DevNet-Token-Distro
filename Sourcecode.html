@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Text Field and Button Example</title>
+</head>
+<body>
+   <form>
+      <label for="inputText">Enter SOL Token: </label>
+
+      <input type="text" id="inputText" name="inputText">
+
+      <button type="button" onclick="submitForm()">Submit</button>
+
+   </form>
+<script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+
+<script>
+const { Connection, PublicKey} = solanaWeb3;
+</script>
+
+<script>
+
+   function submitForm() {
+       // transfer some solana to that address if user enters (---------insert your solana devnet id here---------)
+
+       var solanaPublicKey = document.getElementById("inputText").value;   
+
+       //Copied code
+
+       // connection
+
+       const connection = new Connection("https://api.devnet.solana.com");
+
+       let publicKeyObject = new PublicKey (solanaPublicKey)
+
+       const fn = (async () => {
+
+         // 1e9 lamports = 10^9 lamports = 1 SOL
+         let txhash = await connection.requestAirdrop(publicKeyObject, 1e9);
+        
+         console.log(`txhash: ${txhash}`);
+
+         // end of copied
+
+         const inputText = document.getElementById("inputText").value;
+
+         alert("You entered: " + inputText);
+          });
+          fn();
+            
+      }
+
+   </script>
+</body>
+</html>
